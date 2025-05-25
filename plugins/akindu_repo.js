@@ -43,9 +43,6 @@ async (conn, mek, m, { from, reply }) => {
 ❒ *ꜰᴏʀᴋ ᴀɴᴅ ɢɪᴠᴇ ᴀ ꜱᴛᴀʀ ᴍʏ ᴡʜᴀᴛꜱ ᴀᴘᴘ ʙᴏᴛ*
 
 > *ᴀᴋɪɴᴅᴜ ᴍᴅ*`;
-        
-            }
-        }, { quoted: mek });
 
     } catch (error) {
         console.error("Error in repo command:", error);
