@@ -62,9 +62,9 @@ cmd({
 
     // Send response
     await reply(
-      `*${mediaType} ᴀᴋɪɴᴅᴜ ᴍᴅ ᴜʀʟ ᴄᴏɴᴠᴇʀᴛᴇᴇ 🖇️*\n\n` +
-      `ᴜʀʟ : 🖇️ ${mediaUrl}\n\n` +
-      > `*ᴀᴋɪɴᴅᴜ ᴍᴅ*`
+      `*${mediaType} ᴀᴋɪɴᴅᴜ ᴍᴅ ᴜʀʟ ᴄᴏɴᴠᴇʀᴛᴇᴇ 🖇️*\n\n +
+        ᴜʀʟ : 🖇️ ${mediaUrl}\n\n +
+      > *ᴀᴋɪɴᴅᴜ ᴍᴅ*`
     );
 
   } catch (error) {
