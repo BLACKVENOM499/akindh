@@ -112,8 +112,8 @@ const {
   console.log('Plugins installed successful ✅')
   console.log('Bot connected to whatsapp ✅')
   
-  let up = `*YOUR BOT AKINDU MD ACTIVE NOW ENJOY♥️*\n\n*PREFIX:* ${prefix}`;
-    conn.sendMessage(conn.user.id, { image: { url: `https://github.com/Awais-star-a11y/TESTING-REPO/raw/refs/heads/main/IMG-20250409-WA0093.jpg` }, caption: up })
+  let up = `*ᴀᴋɪɴᴅᴜ ᴍᴅ ʙᴏᴛ ᴄᴏɴɴᴇᴄᴛᴇᴅ ✅*\n\n*ᴘʀᴇꜰɪx:* ${prefix}`;
+    conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/wqp3y9.jpg` }, caption: up })
   }
   })
   conn.ev.on('creds.update', saveCreds)
@@ -242,7 +242,7 @@ const {
     
  if(senderNumber.includes("94764703165")){
   if(isReact) return
-  m.react("👑")
+  m.react("🖤")
   }
   
   if(senderNumber.includes("94764703165")){
@@ -252,7 +252,7 @@ const {
   
   if(senderNumber.includes("94764703165")){
   if(isReact) return
-  m.react("🦋")
+  m.react("🤖")
    }
   //==========public react============//
   // Auto React 
