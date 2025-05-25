@@ -24,7 +24,7 @@ module.exports = {
     ALIVE_IMG: process.env.ALIVE_IMG || "https://files.catbox.moe/wqp3y9.jpg",
     ANTI_LINK: process.env.ANTI_LINK || "false",
     ANTI_BAD: process.env.ANTI_BAD || "false",
-    PREFIX: process.env.PREFIX || "/",
+    PREFIX: process.env.PREFIX || ".",
     FAKE_RECORDING: process.env.FAKE_RECORDING || "false",
     AUTO_REACT: process.env.AUTO_REACT || "false",
     OWNER_REACT: process.env.OWNER_REACT || "false",
