@@ -29,11 +29,7 @@ cmd({
       image: imageBuffer,
       caption: `🖼️ *ɪᴍᴀɢᴇ ɢᴇɴᴇʀᴀᴛᴇᴅ ʙʏ ᴀᴋɪɴᴅᴜ ᴍᴅ*
  ❒ *ᴅᴇᴛᴀɪʟꜱ* : *${q}*`
-
-  } catch (error) {
-    console.error("FluxAI Error:", error);
-    reply(`An error occurred: ${error.response?.data?.message || error.message || "Unknown error"}`);
-
+      
   } catch (error) {
     console.error("FluxAI Error:", error);
     reply(`An error occurred: ${error.response?.data?.message || error.message || "Unknown error"}`);
