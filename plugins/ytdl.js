@@ -42,7 +42,16 @@ cmd({
 
 _Reply to this message with 1 or 2 to download._`;
 
-        
+        let contextInfo = {
+            mentionedJid: [m.sender],
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363382023564830@newsletter',
+                newsletterName: 'B.M.B TECH',
+                serverMessageId: 143
+            }
+        };
 
         // Send thumbnail with options
         const videoMsg = await conn.sendMessage(from, { image: { url: yts.thumbnail }, caption: ytmsg, contextInfo }, { quoted: mek });
@@ -134,7 +143,18 @@ cmd({
 
 _Reply with 1, 2 or 3 to this message to download the format you prefer._`;
         
+        let contextInfo = {
+            mentionedJid: [m.sender],
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363382023564830@newsletter',
+                newsletterName: 'B.M.B XMD',
+                serverMessageId: 143
+            }
+        };
         
+        // Send thumbnail with caption only
   const songmsg = await conn.sendMessage(from, { image: { url: yts.thumbnail }, caption: ytmsg, contextInfo }, { quoted: mek });
 
   
