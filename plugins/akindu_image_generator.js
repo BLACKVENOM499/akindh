@@ -28,8 +28,7 @@ cmd({
     await conn.sendMessage(m.chat, {
       image: imageBuffer,
       caption: `🖼️ *ɪᴍᴀɢᴇ ɢᴇɴᴇʀᴀᴛᴇᴅ ʙʏ ᴀᴋɪɴᴅᴜ ᴍᴅ*
- ❒ *ᴅᴇᴛᴀɪʟꜱ* : *${q}*`
-    });
+ ❒ *ᴅᴇᴛᴀɪʟꜱ* : *${q}*`;
 
   } catch (error) {
     console.error("FluxAI Error:", error);
