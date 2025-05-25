@@ -29,26 +29,26 @@ cmd({
             return reply("Failed to fetch the video. Please try again later.");
         }
 
-        let ytmsg = `📹 *Video Details*
-🎬 *Title:* ${yts.title}
-⏳ *Duration:* ${yts.timestamp}
-👀 *Views:* ${yts.views}
-👤 *Author:* ${yts.author.name}
-🔗 *Link:* ${yts.url}
+        let ytmsg = `📹 *_ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_ 📹*
+        
+🎬 *ᴛɪᴛʟᴇ:* ${yts.title}
+⏳ *ᴅᴜʀᴀᴛɪᴏɴ:* ${yts.timestamp}
+👀 *ᴠɪᴇᴡꜱ:* ${yts.views}
+👤 *ᴀᴜᴛʜᴏʀ:* ${yts.author.name}
+🔗 *ʟɪɴᴋ:* ${yts.url}
 
-*Choose download format:*
-1. 📄 Document (no preview)
-2. ▶️ Normal Video (with preview)
+*ʀᴇᴘʟʏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ:*
 
-_Reply to this message with 1 or 2 to download._`;
+1. 📂 ᴅᴏᴄᴜᴍᴇɴᴛ ᴠɪᴅᴇᴏ
+2. 🎬 ɴᴏʀᴍᴀʟ ᴠɪᴅᴇᴏ`;
 
         let contextInfo = {
             mentionedJid: [m.sender],
             forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363382023564830@newsletter',
-                newsletterName: 'B.M.B TECH',
+                newsletterJid: '120363400898693892@newsletter',
+                newsletterName: 'ᴀᴋɪɴᴅᴜ-ᴍᴅ',
                 serverMessageId: 143
             }
         };
@@ -66,7 +66,7 @@ _Reply to this message with 1 or 2 to download._`;
                 replyMsg.message.extendedTextMessage.contextInfo &&
                 replyMsg.message.extendedTextMessage.contextInfo.stanzaId === videoMsg.key.id
             ) {
-                await conn.sendMessage(from, { react: { text: "⬇️", key: replyMsg.key } });
+                await conn.sendMessage(from, { react: { text: "📥", key: replyMsg.key } });
 
                 switch (selected) {
                     case "1":
@@ -89,7 +89,7 @@ _Reply to this message with 1 or 2 to download._`;
                     default:
                         await conn.sendMessage(
                             from,
-                            { text: "*Please Reply with ( 1 , 2 or 3) ❤️" },
+                            { text: "*ᴘʟᴇᴀꜱᴇ ʀᴇᴘʟʏ 1 ᴏʀ 2*" },
                             { quoted: replyMsg }
                         );
                         break;
@@ -106,7 +106,7 @@ _Reply to this message with 1 or 2 to download._`;
 // MP3 song download
 cmd({ 
     pattern: "song", 
-    alias: ["ytdl3", "playy"], 
+    alias: ["ytdl3", "play"], 
     react: "🎶", 
     desc: "Download YouTube song", 
     category: "main", 
@@ -129,27 +129,27 @@ cmd({
             return reply("Failed to fetch the audio. Please try again later.");
         }
         
-        let ytmsg = `🎵 *Song Details*
-🎶 *Title:* ${yts.title}
-⏳ *Duration:* ${yts.timestamp}
-👀 *Views:* ${yts.views}
-👤 *Author:* ${yts.author.name}
-🔗 *Link:* ${yts.url}
+        let ytmsg = `🎵 *_ꜱᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ_ 🎵*
+        
+🎶 *ᴛɪᴛʟᴇ:* ${yts.title}
+⏳ *ᴅᴜʀᴀᴛɪᴏɴ:* ${yts.timestamp}
+👀 *ᴠɪᴇᴡꜱ:* ${yts.views}
+👤 *ᴀᴜᴛʜᴏʀ:* ${yts.author.name}
+🔗 *ʟɪɴᴋ:* ${yts.url}
 
-*Choose download format:*
-1. 📄 MP3 as Document
-2. 🎧 MP3 as Audio (Play)
-3. 🎙️ MP3 as Voice Note (PTT)
+*ʀᴇᴘʟʏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ:*
 
-_Reply with 1, 2 or 3 to this message to download the format you prefer._`;
+1. 📂 ꜱᴏɴɢ ᴀꜱ ᴅᴏᴄᴜᴍᴇɴᴛ
+2. 🎧 ꜱᴏɴɢ ᴀꜱ ᴀᴜᴅɪᴏ
+3. 🎙️ ꜱᴏɴɢ ᴀꜱ ᴠᴏɪᴄᴇ`;
         
         let contextInfo = {
             mentionedJid: [m.sender],
             forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363382023564830@newsletter',
-                newsletterName: 'B.M.B XMD',
+                newsletterJid: '120363370227470443@newsletter',
+                newsletterName: 'ᴀᴋɪɴᴅᴜ-ᴍᴅ',
                 serverMessageId: 143
             }
         };
@@ -173,7 +173,7 @@ _Reply with 1, 2 or 3 to this message to download the format you prefer._`;
                 ) {
                 
                             
-                   await conn.sendMessage(from, { react: { text: "⬇️", key: mp3msg.key } });
+                   await conn.sendMessage(from, { react: { text: "📥", key: mp3msg.key } });
 
                     switch (selectedOption) {
 case "1":   
@@ -196,8 +196,7 @@ default:
                             await conn.sendMessage(
                                 from,
                                 {
-                                    text: "*invalid selection please select between ( 1 or 2 or 3) 🔴*",
-                                },
+                                    text: "*ᴘʟᴇᴀꜱᴇ ʀᴇᴘʟʏ 1 , 2 ᴏʀ 3*"},
                                 { quoted: mp3msg }
                             );
              }}});
