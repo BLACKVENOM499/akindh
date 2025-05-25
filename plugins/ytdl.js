@@ -42,16 +42,7 @@ cmd({
 1. 📂 ᴅᴏᴄᴜᴍᴇɴᴛ ᴠɪᴅᴇᴏ
 2. 🎬 ɴᴏʀᴍᴀʟ ᴠɪᴅᴇᴏ`;
 
-        let contextInfo = {
-            mentionedJid: [m.sender],
-            forwardingScore: 999,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363400898693892@newsletter',
-                newsletterName: 'ᴀᴋɪɴᴅᴜ-ᴍᴅ',
-                serverMessageId: 143
-            }
-        };
+        
 
         // Send thumbnail with options
         const videoMsg = await conn.sendMessage(from, { image: { url: yts.thumbnail }, caption: ytmsg, contextInfo }, { quoted: mek });
