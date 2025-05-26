@@ -20,7 +20,7 @@ cmd({
         if (yt.results.length < 1) return reply("No results found!");
         
         let yts = yt.results[0];  
-        let apiUrl = `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(yts.url)}`;
+        let apiUrl = `https://lakiya-api-site.vercel.app/download/ytdl?url=https%3A%2F%2Fyoutu.be%2Ft1p9QVgqKNU%3Fsi%3DNFi5SxOhr0eWZfa4&format=720${encodeURIComponent(yts.url)}`;
         
         let response = await fetch(apiUrl);
         let data = await response.json();
