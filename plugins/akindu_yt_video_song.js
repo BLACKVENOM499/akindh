@@ -1,100 +1,548 @@
 
+
+
 const {
   cmd,
   commands
-} = require('../command');
+} = require("../command");
 const yts = require("yt-search");
-const axios = require("axios");
+const {
+  fetchJson
+} = require("../lib/functions");
+const axios = require('axios');
+async function ytmp4(_0x32b019, _0x339734) {
+  try {
+    if (!_0x32b019 || !_0x339734) {
+      throw new Error("url and format parameters are required.");
+    }
+    const _0xd702fb = parseInt(_0x339734.replace('p', ''), 0xa);
+    const _0x3cc703 = {
+      'button': 0x1,
+      'start': 0x1,
+      'end': 0x1,
+      'format': _0xd702fb,
+      'url': _0x32b019
+    };
+    const _0x5a1205 = {
+      'Accept': '*/*',
+      'Accept-Encoding': "gzip, deflate, br",
+      'Accept-Language': "en-GB,en-US;q=0.9,en;q=0.8",
+      'Origin': 'https://loader.to',
+      'Referer': "https://loader.to",
+      'Sec-Ch-Ua': "\"Not-A.Brand\";v=\"99\", \"Chromium\";v=\"124\"",
+      'Sec-Ch-Ua-Mobile': '?1',
+      'Sec-Ch-Ua-Platform': "\"Android\"",
+      'Sec-Fetch-Dest': "empty",
+      'Sec-Fetch-Mode': "cors",
+      'Sec-Fetch-Site': "cross-site",
+      'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+    };
+    const _0x4ee39c = await axios.get('https://ab.cococococ.com/ajax/download.php', {
+      'params': _0x3cc703,
+      'headers': _0x5a1205
+    });
+    const _0x2d1163 = _0x4ee39c.data.id;
+    const _0x137113 = async () => {
+      const _0xab25fa = {
+        'id': _0x2d1163
+      };
+      try {
+        const _0xeafb6b = await axios.get("https://p.oceansaver.in/ajax/progress.php", {
+          'params': _0xab25fa,
+          'headers': _0x5a1205
+        });
+        const {
+          progress: _0x48ee9e,
+          download_url: _0xd7e658,
+          text: _0x245ada
+        } = _0xeafb6b.data;
+        return _0x245ada === "Finished" ? _0xd7e658 : (await new Promise(_0x485c8a => setTimeout(_0x485c8a, 0x3e8)), _0x137113());
+      } catch (_0x27cb21) {
+        throw new Error("Error in progress check: " + _0x27cb21.message);
+      }
+    };
+    return await _0x137113();
+  } catch (_0x1503ed) {
+    console.error("Error:", _0x1503ed);
+    return {
+      'error': _0x1503ed.message
+    };
+  }
+}
+module.exports = {
+  'ytmp4': ytmp4
+};
+function extractYouTubeId(_0x46641b) {
+  const _0x4d2333 = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|playlist\?list=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const _0x4136c6 = _0x46641b.match(_0x4d2333);
+  return _0x4136c6 ? _0x4136c6[0x1] : null;
+}
+function convertYouTubeLink(_0x584404) {
+  const _0x58dae8 = extractYouTubeId(_0x584404);
+  if (_0x58dae8) {
+    return "https://www.youtube.com/watch?v=" + _0x58dae8;
+  }
+  return _0x584404;
+}
 cmd({
-  'pattern': "video4",
-  'alias': ["ytvid4", "ytv4", 'ytvideo4'],
-  'react': '🔃',
-  'desc': "Download videos from YouTube by searching for keywords.",
-  'category': "video",
-  'use': ".vidx <keywords>",
+  'pattern': "song",
+  'alias': "play",
+  'desc': "To download songs.",
+  'react': '🔎',
+  'category': "download",
   'filename': __filename
-}, async (_0x443755, _0x543ba8, _0xb49b84, {
-  from: _0x33c56a,
-  args: _0x145006,
-  reply: _0x2710af
+}, async (_0x5351f6, _0x1439a7, _0x278458, {
+  from: _0x14fac3,
+  quoted: _0x2b9c51,
+  body: _0x5daecf,
+  isCmd: _0x34876e,
+  command: _0x536863,
+  args: _0x59cb59,
+  q: _0x380df9,
+  isGroup: _0x370f61,
+  sender: _0x34a112,
+  senderNumber: _0x291f83,
+  botNumber2: _0x5af75e,
+  botNumber: _0x1870b0,
+  pushname: _0x5d0cea,
+  isMe: _0x3c0b23,
+  isOwner: _0x341bbe,
+  groupMetadata: _0x44abd4,
+  groupName: _0x5de46d,
+  participants: _0x34f227,
+  groupAdmins: _0x548f13,
+  isBotAdmins: _0x9fa565,
+  isAdmins: _0x127641,
+  reply: _0x233cc6
 }) => {
   try {
-    const _0x180808 = _0x145006.join(" ");
-    if (!_0x180808) {
-      return _0x2710af("*Please provide a video tital or url*");
+    if (!_0x380df9) {
+      return _0x233cc6("Please give me a URL or title. Eg .play Lily By Alan Walker");
     }
-    _0x2710af("> © ʟᴏʀᴅ xᴍᴅ Sᴇɴᴅɪɴɢ Yᴏᴜʀ ᴠɪᴅᴇᴏ Wᴀɪᴛ... ❄️");
-    const _0x1c3fd5 = await yts(_0x180808);
-    if (!_0x1c3fd5.videos || _0x1c3fd5.videos.length === 0x0) {
-      return _0x2710af("❌ No results found for \"" + _0x180808 + "\".");
-    }
-    const _0x3e0ad8 = _0x1c3fd5.videos[0x0];
-    const _0x898f76 = _0x3e0ad8.url;
-    const _0x4200bd = "https://deliriussapi-oficial.vercel.app/download/ytmp4?url" + _0x898f76;
-    const _0x487ed3 = await axios.get(_0x4200bd);
-    if (!_0x487ed3.data.success) {
-      return _0x2710af("❌ Failed to fetch video for \"" + _0x180808 + "\".");
-    }
-    const {
-      download_url: _0xd424ba
-    } = _0x487ed3.data.result;
-    await _0x443755.sendMessage(_0x33c56a, {
-      'video': {
-        'url': _0xd424ba
+    _0x380df9 = convertYouTubeLink(_0x380df9);
+    const _0x54cf3a = await yts(_0x380df9);
+    const _0x20e1e8 = _0x54cf3a.videos[0x0];
+    const _0x5ed25e = _0x20e1e8.url;
+    const _0x166c67 = await _0x5351f6.sendMessage(_0x14fac3, {
+      'image': {
+        'url': _0x20e1e8.thumbnail
       },
-      'mimetype': "video/mp4"
+      'caption': "\n``❄️🅻🅾🆁🅳 - 🆇🅼🅳❄️`\n\n ─┄┈┈┉┉┉┅┅┅┅┅─┄┅┅┅┅┅┅┅┅┅\n*⟣ ʟᴏʀᴅ xᴍᴅ sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ⟢*\n┅┅┅┅┅┅┅┄┄┄┄┄┄┄┄┅┅┅┅┅┅┅┅┅┅\n-  *ᴏᴜʀ ᴄʜᴀɴɴᴇʟ*\n\n*https://whatsapp.com/channel/0029VayTeumIN9io4KVkqx28*\n┅┅┅┄┄┄┄┄┄─────┉┉┉┉┉┉┉┉┉┉\n\n> ℹ️ ʀᴇᴘʟʏ ʙᴇʟᴏᴡ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ғᴏʀᴍᴀᴛ\n\n*1   ┃ ᴀᴜᴅɪᴏ sᴏɴɢ🎵*\n*2   ┃  ᴅᴏᴄᴜᴍᴇɴᴛ sᴏɴɢ🗂️*\n\n> © 2025 • ʟᴏʀᴅ xᴍᴅ \n"
     }, {
-      'quoted': _0x543ba8
+      'quoted': _0x1439a7
     });
-  } catch (_0x4921e0) {
-    console.error(_0x4921e0);
-    _0x2710af("❌ An error occurred while processing your request.");
+      
+
+    const _0x164ac6 = _0x166c67.key.id;
+    _0x5351f6.ev.on("messages.upsert", async _0x11c496 => {
+      const _0x25ddf5 = _0x11c496.messages[0x0];
+      if (!_0x25ddf5.message) {
+        return;
+      }
+      const _0x5f20ab = _0x25ddf5.message.conversation || _0x25ddf5.message.extendedTextMessage?.["text"];
+      const _0x3277a3 = _0x25ddf5.key.remoteJid;
+      const _0x3cf2a8 = _0x25ddf5.message.extendedTextMessage && _0x25ddf5.message.extendedTextMessage.contextInfo.stanzaId === _0x164ac6;
+      if (_0x3cf2a8) {
+        await _0x5351f6.sendMessage(_0x3277a3, {
+          'react': {
+            'text': '⬇️',
+            'key': _0x25ddf5.key
+          }
+        });
+        const _0x1cc9d0 = await fetchJson('https://api.giftedtech.my.id/api/download/dlmp3?apikey=gifted&url=' + _0x5ed25e);//https://api.giftedtech.my.id/api/download/dlmp3q?apikey=gifted&quality=128&url= //https://api.giftedtech.my.id/api/download/ytmp3v2?apikey=gifted&url=https://youtu.be/qHDJSRlNhVs?feature=shared // https://api.giftedtech.my.id/api/download/ytmp3v2?apikey=gifted&url=
+        const _0x5741ec = _0x1cc9d0.result.download_url;
+        await _0x5351f6.sendMessage(_0x3277a3, {
+          'delete': _0x166c67.key
+        });
+        await _0x5351f6.sendMessage(_0x3277a3, {
+          'react': {
+            'text': '⬆️',
+            'key': _0x25ddf5.key
+          }
+        });
+        if (_0x5f20ab === '1') {
+          await _0x5351f6.sendMessage(_0x3277a3, {
+            'audio': {
+              'url': _0x5741ec
+            },
+            'mimetype': "audio/mpeg",
+            'contextInfo': {
+              'externalAdReply': {
+                'title': _0x20e1e8.title,
+                'body': _0x20e1e8.videoId,
+                'mediaType': 0x1,
+                'sourceUrl': _0x20e1e8.url,
+                'thumbnailUrl': _0x20e1e8.thumbnail,
+                'renderLargerThumbnail': true,
+                'showAdAttribution': true
+              }
+            }
+          }, {
+            'quoted': _0x25ddf5
+          });
+          await _0x5351f6.sendMessage(_0x3277a3, {
+            'react': {
+              'text': '✅',
+              'key': _0x25ddf5.key
+            }
+          });
+        } else if (_0x5f20ab === '2') {
+          await _0x5351f6.sendMessage(_0x3277a3, {
+            'document': {
+              'url': _0x5741ec
+            },
+            'mimetype': "audio/mp3",
+            'fileName': _0x20e1e8.title + ".mp3",
+            'caption': "\n> *© Gᴇɴᴇʀᴀᴛᴇᴅ Bʏ ʟᴏʀᴅ xᴍᴅ*\n "
+          }, {
+            'quoted': _0x25ddf5
+          });
+          await _0x5351f6.sendMessage(_0x3277a3, {
+            'react': {
+              'text': '✅',
+              'key': _0x25ddf5.key
+            }
+          });
+        }
+      }
+    });
+  } catch (_0x3c31c1) {
+    console.log(_0x3c31c1);
+    _0x233cc6('' + _0x3c31c1);
   }
 });
 cmd({
-  'pattern': "play4",
-  'alias': ["song4", "ytplay4"],
-  'react': '🔃',
-  'desc': "Download audio from YouTube by searching for keywords.",
-  'category': "music",
-  'use': ".playx <keywords>",
+  'pattern': 'video',
+  'desc': "To download videos.",
+  'react': '🎥',
+  'category': "download",
   'filename': __filename
-}, async (_0x222018, _0x5bc6a4, _0x2b481b, {
-  from: _0x35d246,
-  args: _0x3a1931,
-  reply: _0x31fd3f
+}, async (_0x2a6587, _0x4b0a32, _0x3ae238, {
+  from: _0x2b34ab,
+  quoted: _0x2ba078,
+  body: _0x46f813,
+  isCmd: _0x3262b0,
+  command: _0x17c989,
+  args: _0x7df19c,
+  q: _0x2f11f7,
+  isGroup: _0xd32a93,
+  sender: _0x4f21a1,
+  senderNumber: _0x3cbd23,
+  botNumber2: _0x423dc5,
+  botNumber: _0x117579,
+  pushname: _0x256e29,
+  isMe: _0x10a986,
+  isOwner: _0x5415e8,
+  groupMetadata: _0x24abd2,
+  groupName: _0x31f52b,
+  participants: _0x3ff081,
+  groupAdmins: _0x5f0186,
+  isBotAdmins: _0xe9b71d,
+  isAdmins: _0x3186a2,
+  reply: _0x419796
 }) => {
   try {
-    const _0x2b4b83 = _0x3a1931.join(" ");
-    if (!_0x2b4b83) {
-      return _0x31fd3f("*Please provide a audio tital or url*");
+    if (!_0x2f11f7) {
+      return _0x419796("Please give me a URL or title.");
     }
-    _0x31fd3f("> © ʟᴏʀᴅ xᴍᴅ ᴅᴡɴʟᴏᴀᴅɪɴɢ ʏᴏᴜʀ Sᴏɴɢ Wᴀɪᴛ...❄️");
-    const _0x116e0a = await yts(_0x2b4b83);
-    if (!_0x116e0a.videos || _0x116e0a.videos.length === 0x0) {
-      return _0x31fd3f("❌ No results found for \"" + _0x2b4b83 + "\".");
-    }
-    const _0x50d4d8 = _0x116e0a.videos[0x0];
-    const _0x228b87 = _0x50d4d8.url;
-    const _0xd4aee7 = "https://deliriussapi-oficial.vercel.app/download/ytmp3?url=" + _0x228b87;
-    const _0x4c55a0 = await axios.get(_0xd4aee7);
-    if (!_0x4c55a0.data.success) {
-      return _0x31fd3f("❌ Failed to fetch audio for \"" + _0x2b4b83 + "\".");
-    }
-    const {
-      download_url: _0x95f653
-    } = _0x4c55a0.data.result;
-    await _0x222018.sendMessage(_0x35d246, {
-      'audio': {
-        'url': _0x95f653
+    _0x2f11f7 = convertYouTubeLink(_0x2f11f7);
+    const _0x516cf9 = await yts(_0x2f11f7);
+    const _0x546126 = _0x516cf9.videos[0x0];
+    const _0x16c3d4 = _0x546126.url;
+    const _0x51503b = await _0x2a6587.sendMessage(_0x2b34ab, {
+      'image': {
+        'url': _0x546126.thumbnail
       },
-      'mimetype': 'audio/mp4',
-      'ptt': false
+      'caption': "\n*❄️🅻🅾🆁🅳 🆇🅼🅳❄️* \n\n╭┈┈┄┄┄┄┅┅┅┅┅┅┅┅┅┅┅┅\n┃ʟᴏʀᴅ xᴍᴅ ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ ✻\n╰─┄┄┄┄┄┅┅┅┅┅┅┅┅┅┅┅┅\n╭┄┅┅┅┅┅┈┈┈┈┉┉┉┉\n\n🔢 *ʀᴇᴘʟʏ ʙᴇʟᴏᴡ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴛᴏ*\n*ᴅᴏᴡɴʟᴏᴀᴅ ꜰʀᴏᴍᴀᴛ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴠɪᴅᴇᴏ 🎬*\n\n*1.1*     ┃  *360ᴘ*\n*1.2*     ┃  *480ᴘ*\n*1.3*     ┃  *720ᴘ*\n*1.4*     ┃  *1080ᴘ*\n\n*ᴅᴏᴡɴʟᴏᴀᴅ ᴅᴏᴄᴜᴍᴇɴᴛ 📁*\n\n*2.1*     ┃  *360ᴘ*\n*2.2*     ┃  *480ᴘ*\n*2.3*     ┃  *720ᴘ*\n*2.4*     ┃  *1080ᴘ*\n\n> ʟᴏʀᴅ xᴍᴅ✻\n"
     }, {
-      'quoted': _0x5bc6a4
+      'quoted': _0x4b0a32
     });
-  } catch (_0x40de03) {
-    console.error(_0x40de03);
-    _0x31fd3f("❌ An error occurred while processing your request.");
+    ;
+    const _0x333085 = _0x51503b.key.id;
+    _0x2a6587.ev.on('messages.upsert', async _0xe7662f => {
+      const _0x3dce21 = _0xe7662f.messages[0x0];
+      if (!_0x3dce21.message) {
+        return;
+      }
+      const _0x1acf8d = _0x3dce21.message.conversation || _0x3dce21.message.extendedTextMessage?.["text"];
+      const _0x5cd381 = _0x3dce21.key.remoteJid;
+      const _0x5e3294 = _0x3dce21.message.extendedTextMessage && _0x3dce21.message.extendedTextMessage.contextInfo.stanzaId === _0x333085;
+      if (_0x5e3294) {
+        await _0x2a6587.sendMessage(_0x5cd381, {
+          'react': {
+            'text': '⬇️',
+            'key': _0x3dce21.key
+          }
+        });
+        if (_0x1acf8d === "1.1") {
+          const _0x404514 = await ytmp4('' + _0x16c3d4, "360p");
+          await _0x2a6587.sendMessage(_0x5cd381, {
+            'delete': _0x51503b.key
+          });
+          await _0x2a6587.sendMessage(_0x5cd381, {
+            'react': {
+              'text': '⬆️',
+              'key': _0x3dce21.key
+            }
+          });
+          await _0x2a6587.sendMessage(_0x5cd381, {
+            'video': {
+              'url': _0x404514
+            },
+            'caption': "\n*🌟Gᴇɴᴇʀᴀᴛᴇᴅ 4 Yᴏᴜ Bʏ ʟᴏʀᴅ xᴍᴅ🌟*\n"
+          }, {
+            'quoted': _0x3dce21
+          });
+          await _0x2a6587.sendMessage(_0x5cd381, {
+            'react': {
+              'text': '✅',
+              'key': _0x3dce21.key
+            }
+          });
+        } else {
+          if (_0x1acf8d === "1.2") {
+            const _0x13f213 = await ytmp4('' + _0x16c3d4, "480");
+            await _0x2a6587.sendMessage(_0x5cd381, {
+              'delete': _0x51503b.key
+            });
+            await _0x2a6587.sendMessage(_0x5cd381, {
+              'react': {
+                'text': '🔃',
+                'key': _0x3dce21.key
+              }
+            });
+            await _0x2a6587.sendMessage(_0x5cd381, {
+              'video': {
+                'url': _0x13f213
+              },
+              'caption': "\n*🌟Gᴇɴᴇʀᴀᴛᴇᴅ 4 Yᴏᴜ Bʏ ʟᴏʀᴅ xᴍᴅ🌟*\n"
+            }, {
+              'quoted': _0x3dce21
+            });
+            await _0x2a6587.sendMessage(_0x5cd381, {
+              'react': {
+                'text': '✅',
+                'key': _0x3dce21.key
+              }
+            });
+          } else {
+            if (_0x1acf8d === "1.3") {
+              const _0x3e40d4 = await ytmp4('' + _0x16c3d4, '720');
+              await _0x2a6587.sendMessage(_0x5cd381, {
+                'delete': _0x51503b.key
+              });
+              await _0x2a6587.sendMessage(_0x5cd381, {
+                'react': {
+                  'text': '⬆️',
+                  'key': _0x3dce21.key
+                }
+              });
+              await _0x2a6587.sendMessage(_0x5cd381, {
+                'video': {
+                  'url': _0x3e40d4
+                },
+                'caption': "\n*🌟Gᴇɴᴇʀᴀᴛᴇᴅ 4 Yᴏᴜ Bʏ ʟᴏʀᴅ xᴍᴅ🌟*\n"
+              }, {
+                'quoted': _0x3dce21
+              });
+              await _0x2a6587.sendMessage(_0x5cd381, {
+                'react': {
+                  'text': '✅',
+                  'key': _0x3dce21.key
+                }
+              });
+            } else {
+              if (_0x1acf8d === '1.4') {
+                const _0x14529b = await ytmp4('' + _0x16c3d4, "1080");
+                await _0x2a6587.sendMessage(_0x5cd381, {
+                  'delete': _0x51503b.key
+                });
+                await _0x2a6587.sendMessage(_0x5cd381, {
+                  'react': {
+                    'text': '⬆️',
+                    'key': _0x3dce21.key
+                  }
+                });
+                await _0x2a6587.sendMessage(_0x5cd381, {
+                  'video': {
+                    'url': _0x14529b
+                  },
+                  'caption': "\n*🌟Gᴇɴᴇʀᴀᴛᴇᴅ 4 Yᴏᴜ Bʏ ʟᴏʀᴅ xᴍᴅ🌟*\n"
+                }, {
+                  'quoted': _0x3dce21
+                });
+                await _0x2a6587.sendMessage(_0x5cd381, {
+                  'react': {
+                    'text': '✅',
+                    'key': _0x3dce21.key
+                  }
+                });
+              } else {
+                if (_0x1acf8d === "2.1") {
+                  const _0x252f61 = await ytmp4('' + _0x16c3d4, "360");
+                  await _0x2a6587.sendMessage(_0x5cd381, {
+                    'delete': _0x51503b.key
+                  });
+                  await _0x2a6587.sendMessage(_0x5cd381, {
+                    'react': {
+                      'text': '⬆️',
+                      'key': _0x3dce21.key
+                    }
+                  });
+                  await _0x2a6587.sendMessage(_0x5cd381, {
+                    'document': {
+                      'url': _0x252f61
+                    },
+                    'mimetype': "video/mp4",
+                    'fileName': _0x546126.title + ".mp4",
+                    'caption': "\n*🌟Gᴇɴᴇʀᴀᴛᴇᴅ 4 Yᴏᴜ Bʏ ʟᴏʀᴅ xᴍᴅ🌟*\n"
+                  }, {
+                    'quoted': _0x3dce21
+                  });
+                  await _0x2a6587.sendMessage(_0x5cd381, {
+                    'react': {
+                      'text': '✅',
+                      'key': _0x3dce21.key
+                    }
+                  });
+                } else {
+                  if (_0x1acf8d === '2.2') {
+                    const _0x1bbfe2 = await ytmp4('' + _0x16c3d4, '480');
+                    await _0x2a6587.sendMessage(_0x5cd381, {
+                      'delete': _0x51503b.key
+                    });
+                    await _0x2a6587.sendMessage(_0x5cd381, {
+                      'react': {
+                        'text': '⬆️',
+                        'key': _0x3dce21.key
+                      }
+                    });
+                    await _0x2a6587.sendMessage(_0x5cd381, {
+                      'document': {
+                        'url': _0x1bbfe2
+                      },
+                      'mimetype': "video/mp4",
+                      'fileName': _0x546126.title + ".mp4",
+                      'caption': "\n*🌟Gᴇɴᴇʀᴀᴛᴇᴅ 4 Yᴏᴜ Bʏ ʟᴏʀᴅ xᴍᴅ🌟*\n"
+                    }, {
+                      'quoted': _0x3dce21
+                    });
+                    await _0x2a6587.sendMessage(_0x5cd381, {
+                      'react': {
+                        'text': '✅',
+                        'key': _0x3dce21.key
+                      }
+                    });
+                  } else {
+                    if (_0x1acf8d === "2.3") {
+                      const _0x24a2c5 = await ytmp4('' + _0x16c3d4, '720');
+                      await _0x2a6587.sendMessage(_0x5cd381, {
+                        'delete': _0x51503b.key
+                      });
+                      await _0x2a6587.sendMessage(_0x5cd381, {
+                        'react': {
+                          'text': '⬆️',
+                          'key': _0x3dce21.key
+                        }
+                      });
+                      await _0x2a6587.sendMessage(_0x5cd381, {
+                        'document': {
+                          'url': _0x24a2c5
+                        },
+                        'mimetype': "video/mp4",
+                        'fileName': _0x546126.title + ".mp4",
+                        'caption': "\n*🌟Gᴇɴᴇʀᴀᴛᴇᴅ 4 Yᴏᴜ Bʏ ʟᴏʀᴅ xᴍᴅ🌟*\n"
+                      }, {
+                        'quoted': _0x3dce21
+                      });
+                      await _0x2a6587.sendMessage(_0x5cd381, {
+                        'react': {
+                          'text': '✅',
+                          'key': _0x3dce21.key
+                        }
+                      });
+                    } else {
+                      if (_0x1acf8d === '2.4') {
+                        const _0xfcc167 = await ytmp4('' + _0x16c3d4, "1080");
+                        await _0x2a6587.sendMessage(_0x5cd381, {
+                          'delete': _0x51503b.key
+                        });
+                        await _0x2a6587.sendMessage(_0x5cd381, {
+                          'react': {
+                            'text': '⬆️',
+                            'key': _0x3dce21.key
+                          }
+                        });
+                        await _0x2a6587.sendMessage(_0x5cd381, {
+                          'document': {
+                            'url': _0xfcc167
+                          },
+                          'mimetype': "video/mp4",
+                          'fileName': _0x546126.title + ".mp4",
+                          'caption': "\n*🌟Gᴇɴᴇʀᴀᴛᴇᴅ 4 Yᴏᴜ Bʏ ʟᴏʀᴅx🌟*\n"
+                        }, {
+                          'quoted': _0x3dce21
+                        });
+                        await _0x2a6587.sendMessage(_0x5cd381, {
+                          'react': {
+                            'text': '✅',
+                            'key': _0x3dce21.key
+                          }
+                        });
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  } catch (_0x2c8571) {
+    console.log(_0x2c8571);
+    _0x419796('' + _0x2c8571);
+  }
+});
+cmd({
+  'pattern': "yta",
+  'alias': "ytmp3",
+  'react': '⬇️',
+  'dontAddCommandList': true,
+  'filename': __filename
+}, async (_0x47e326, _0x16846a, _0x46f567, {
+  from: _0x31abbc,
+  q: _0x507947,
+  reply: _0x17432c
+}) => {
+  try {
+    if (!_0x507947) {
+      return await _0x17432c("*Need a YouTube URL!*");
+    }
+    const _0x5df9ac = await dlyta(_0x507947);
+    await _0x47e326.sendMessage(_0x31abbc, {
+      'audio': {
+        'url': _0x5df9ac.dl_link
+      },
+      'mimetype': "audio/mpeg"
+    }, {
+      'quoted': _0x16846a
+    });
+  } catch (_0x42217d) {
+    console.log("First attempt failed:", _0x42217d);
+    try {
+      const _0x9c7197 = await dlyta(_0x507947);
+      await _0x47e326.sendMessage(_0x31abbc, {
+        'audio': {
+          'url': _0x9c7197.dl_link
+        },
+        'mimetype': "audio/mpeg"
+      }, {
+        'quoted': _0x16846a
+      });
+    } catch (_0x43638b) {
+      console.log("Second attempt failed:", _0x43638b);
+      await _0x17432c("*Failed to process the request. Please try again later!*");
+    }
   }
 });
