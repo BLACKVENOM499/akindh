@@ -72,7 +72,7 @@ cmd({
     });
   } catch (_0x46cdf2) {
     console.log(_0x46cdf2);
-    _0x39f257("${e}");
+    _0x39f257("${eorr}");
   }
 });
 cmd({
@@ -144,6 +144,6 @@ cmd({
     });
   } catch (_0x59881b) {
     console.log(_0x59881b);
-    _0x3b9700("${e}");
+    _0x3b9700("${eorr}");
   }
 });
