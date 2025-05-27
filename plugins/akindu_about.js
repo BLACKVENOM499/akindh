@@ -21,6 +21,9 @@ let madeMenu = `*ᴀᴋɪɴᴅᴜ ᴍᴅ ᴀʙᴏᴜᴛ*
 
 ❒ *16 ʏᴇᴀʀꜱ ᴏʟᴅ.*
 
+❒ *ꜰᴏʟʟᴏᴡ ᴍʏ ᴡʜᴀᴛꜱᴀᴘᴘ ᴄʜᴀɴɴᴇʟ*
+  
+
 > *ᴀᴋɪɴᴅᴜ ᴍᴅ*`
 await conn.sendMessage(from,{image:{url:config.ALIVE_IMG},caption:madeMenu},{quoted:mek})
 
